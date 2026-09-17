@@ -1,11 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>Hello, World!</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopee Style Demo</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-left">
+          <a href="#">Seller Centre</a>
+          <a href="#">Download</a>
+          <a href="#">Follow us</a>
+        </div>
+        <div class="topbar-right">
+          <a href="#">Login</a>
+          <a href="#">Sign Up</a>
+          <a href="#">Notification</a>
+        </div>
+      </div>
+    </div>
+
+    <header class="header">
+      <div class="container header-inner">
+        <div class="logo">
+          <div class="logo-mark">R</div>
+          <div class="brand-copy">
+            <strong>旋轉拍賣</strong>
+            <span>Live Bid</span>
+          </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#">熱門</a>
+          <a href="#">手機</a>
+          <a href="#">電器</a>
+          <a href="#">收藏</a>
+          <a href="#">拍賣</a>
+        </nav>
+
+        <div class="header-actions">
+          <div class="status-pill">Live 12:30</div>
+          <div class="chat-bubble-wrap">
+            <div class="chat-bubble">💬</div>
+            <span class="chat-badge">3</span>
+          </div>
+          <div class="cart">🛒</div>
+        </div>
+      </div>
+
+      <div class="container header-search-row">
+        <div class="search-box">
+          <div class="search-bar">
+            <input type="text" placeholder="搜尋商品、拍賣品、品牌" />
+            <button class="search-btn">搜尋</button>
+          </div>
+          <div class="hot-search">
+            <a href="#">電腦</a>
+            <a href="#">手機</a>
+            <a href="#">包包</a>
+            <a href="#">書籍</a>
+            <a href="#">公仔</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="dot"></span>
+              <span>Categories</span>
+            </div>
+          </div>
+
+          <div class="category-row">
+            <div class="category-card">
+              <div class="category-icon">👕</div>
+              <p>Fashion</p>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">💻</div>
+              <p>Electronics</p>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🏠</div>
+              <p>Home</p>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🧴</div>
+              <p>Beauty</p>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🥬</div>
+              <p>Groceries</p>
+            </div>
+            <div class="category-card">
+              <div class="category-icon">🎧</div>
+              <p>Accessories</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="dot"></span>
+              <span>Daily Discover</span>
+            </div>
+            <a class="see-all" href="#">See all</a>
+          </div>
+
+          <div class="product-grid">
+            <article class="product-card">
+              <div class="product-image">👟</div>
+              <div class="product-info">
+                <p class="product-name">Casual running shoes for daily comfort and style</p>
+                <div class="product-price">
+                  <span class="price-main">$39</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image">📱</div>
+              <div class="product-info">
+                <p class="product-name">Smartphone case with shockproof design</p>
+                <div class="product-price">
+                  <span class="price-main">$18</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image">🧴</div>
+              <div class="product-info">
+                <p class="product-name">Hydrating skincare set for fresh and soft skin</p>
+                <div class="product-price">
+                  <span class="price-main">$29</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image">👜</div>
+              <div class="product-info">
+                <p class="product-name">Minimalist shoulder bag with premium texture</p>
+                <div class="product-price">
+                  <span class="price-main">$45</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <div class="product-image">⌚</div>
+              <div class="product-info">
+                <p class="product-name">Classic digital watch with elegant finish</p>
+                <div class="product-price">
+                  <span class="price-main">$64</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© 2026 Shop Demo</span>
+        <span>Free shipping over $50</span>
+        <span>Customer support 24/7</span>
+      </div>
+    </footer>
+  </body>
 </html>
