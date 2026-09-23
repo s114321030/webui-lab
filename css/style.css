@@ -664,13 +664,13 @@ img {
 }
 
 .price-range-control .price-input {
-    width: 70px;
-    margin: 0;
+    width: 100px;
+    margin: 0 0 0 12px;
 }
 
 .price-slider {
     position: relative;
-    width: 210px;
+    width: 120px;
     height: 24px;
 }
 
@@ -685,7 +685,7 @@ img {
 
 .price-slider::before {
     content: "";
-    left: 0;
+    left: 10px;
     right: 0;
     background: var(--primary);
 }
@@ -721,7 +721,7 @@ img {
 .price-range::-webkit-slider-thumb {
     width: 16px;
     height: 16px;
-    border: 2px solid var(--white);
+    border: 1px solid var(--white);
     border-radius: 50%;
     background: var(--primary);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
@@ -734,7 +734,7 @@ img {
 .price-range::-moz-range-thumb {
     width: 13px;
     height: 13px;
-    border: 2px solid var(--white);
+    border: 0px solid var(--white);
     border-radius: 50%;
     background: var(--primary);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
