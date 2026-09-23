@@ -106,9 +106,12 @@ const renderRecentSearches = () => {
   });
 };
 
-searchForm.addEventListener('submit', () => {
+searchForm.addEventListener('submit', (event) => {
   const term = searchInput.value.trim();
-  if (!term) return;
+  if (!term) {
+    event.preventDefault();
+    return;
+  }
   const searches = readRecentSearches().filter((item) => item.toLowerCase() !== term.toLowerCase());
   searches.unshift(term);
   localStorage.setItem(recentSearchesKey, JSON.stringify(searches.slice(0, 12)));
@@ -149,3 +152,15 @@ document.addEventListener('click', (event) => {
     closeAllPanels();
   }
 });
+
+const backToTop = document.querySelector('.back-to-top');
+
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 80);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
