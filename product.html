@@ -14,8 +14,7 @@
         <div class="container">
           <div class="product-detail">
             <div class="product-gallery" aria-label="商品圖片">
-              <div class="product-detail-image" id="product-image"></div>
-              <div class="product-detail-image product-detail-image-secondary" id="product-image-secondary"></div>
+              <div class="product-gallery-track" id="product-gallery-track"></div>
             </div>
             <div class="product-detail-info">
               <span class="product-label">現貨商品</span>
@@ -29,7 +28,10 @@
                   <small>已上架於 <span id="product-date"></span></small>
                 </div>
               </div>
-              <button class="add-to-cart" type="button">🛒 加入購物車</button>
+              <div class="product-actions">
+                <button class="contact-seller" type="button">💬 聯絡賣家</button>
+                <button class="add-to-cart" type="button">🛒 加入購物車</button>
+              </div>
             </div>
           </div>
         </div>
@@ -55,17 +57,83 @@
     <script src="./js/components.js"></script>
     <script>
       const products = {
-        1: { image: '👟', secondaryImage: '🏃', name: 'Casual running shoes', price: '$39', date: '2026/09/18' },
-        2: { image: '📱', secondaryImage: '🛡️', name: 'Smartphone case', price: '$18', date: '2026/09/16' },
-        3: { image: '🧴', secondaryImage: '✨', name: 'Hydrating skincare set', price: '$29', date: '2026/09/14' },
-        4: { image: '👜', secondaryImage: '👝', name: 'Minimalist shoulder bag', price: '$45', date: '2026/09/12' },
-        5: { image: '⌚', secondaryImage: '⏱️', name: 'Classic digital watch', price: '$64', date: '2026/09/10' }
+        1: { images: ['👟', '🏃', '🛣️'], name: 'Casual running shoes', price: '$39', date: '2026/09/18' },
+        2: { images: ['📱', '🛡️'], name: 'Smartphone case', price: '$18', date: '2026/09/16' },
+        3: { images: ['🧴', '✨'], name: 'Hydrating skincare set', price: '$29', date: '2026/09/14' },
+        4: { images: ['👜', '👝'], name: 'Minimalist shoulder bag', price: '$45', date: '2026/09/12' },
+        5: { images: ['⌚', '⏱️'], name: 'Classic digital watch', price: '$64', date: '2026/09/10' }
       };
 
       const productId = new URLSearchParams(window.location.search).get('id') || '1';
       const product = products[productId] || products[1];
-      document.querySelector('#product-image').textContent = product.image;
-      document.querySelector('#product-image-secondary').textContent = product.secondaryImage;
+      const gallery = document.querySelector('.product-gallery');
+      const galleryTrack = document.querySelector('#product-gallery-track');
+      const galleryImages = product.images;
+      const cloneCount = 2;
+      const loopedImages = [
+        ...galleryImages.slice(-cloneCount),
+        ...galleryImages,
+        ...galleryImages.slice(0, cloneCount)
+      ];
+      let galleryIndex = cloneCount;
+      let pointerStart = 0;
+      let pointerDelta = 0;
+      let isDragging = false;
+
+      galleryTrack.innerHTML = loopedImages.map((image) => `
+        <div class="product-detail-image product-gallery-slide">${image}</div>`).join('');
+
+      const getGalleryStep = () => {
+        const gap = Number.parseFloat(getComputedStyle(galleryTrack).gap) || 0;
+        return gallery.clientWidth / 2 + gap / 2;
+      };
+      const moveGallery = (withAnimation = true) => {
+        galleryTrack.style.transition = withAnimation ? 'transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1)' : 'none';
+        galleryTrack.style.transform = `translateX(-${galleryIndex * getGalleryStep()}px)`;
+      };
+
+      galleryTrack.addEventListener('transitionend', () => {
+        if (galleryIndex < cloneCount) {
+          galleryIndex += galleryImages.length;
+          moveGallery(false);
+        }
+        if (galleryIndex >= galleryImages.length + cloneCount) {
+          galleryIndex -= galleryImages.length;
+          moveGallery(false);
+        }
+      });
+
+      gallery.addEventListener('pointerdown', (event) => {
+        isDragging = true;
+        pointerStart = event.clientX;
+        pointerDelta = 0;
+        galleryTrack.style.transition = 'none';
+        gallery.setPointerCapture(event.pointerId);
+      });
+
+      gallery.addEventListener('pointermove', (event) => {
+        if (!isDragging) return;
+        pointerDelta = event.clientX - pointerStart;
+        galleryTrack.style.transform = `translateX(${pointerDelta - galleryIndex * getGalleryStep()}px)`;
+      });
+
+      gallery.addEventListener('pointerup', (event) => {
+        if (!isDragging) return;
+        isDragging = false;
+        gallery.releasePointerCapture(event.pointerId);
+        if (Math.abs(pointerDelta) > 45) {
+          galleryIndex += pointerDelta < 0 ? 1 : -1;
+        }
+        moveGallery(true);
+      });
+
+      gallery.addEventListener('pointercancel', () => {
+        isDragging = false;
+        moveGallery(true);
+      });
+
+      window.addEventListener('resize', () => moveGallery(false));
+      moveGallery(false);
       document.querySelector('#product-name').textContent = product.name;
       document.querySelector('#product-price').textContent = product.price;
       document.querySelector('#product-date').textContent = product.date;

@@ -8,7 +8,7 @@ const sharedHeader = `
       </div>
       <div class="topbar-right">
         <a href="index.html">Login</a>
-        <a href="index.html">Sign Up</a>
+        <a href="signup.html">Sign Up</a>
       </div>
     </div>
   </div>

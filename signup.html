@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>註冊帳號</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div data-component="header"></div>
+
+    <main class="signup-page">
+      <div class="container">
+        <section class="signup-card">
+          <h1>建立帳號</h1>
+          <p>註冊後即可開始收藏與購買商品。</p>
+
+          <form class="signup-form" id="signup-form">
+            <div class="signup-field">
+              <label for="signup-name">使用者名稱</label>
+              <input id="signup-name" name="name" type="text" autocomplete="name" required />
+            </div>
+
+            <div class="signup-field">
+              <label for="signup-email">Email</label>
+              <input id="signup-email" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div class="signup-field">
+              <label for="signup-password">密碼</label>
+              <input id="signup-password" name="password" type="password" minlength="8" autocomplete="new-password" required />
+            </div>
+
+            <div class="signup-field">
+              <label for="signup-confirm-password">確認密碼</label>
+              <input id="signup-confirm-password" name="confirmPassword" type="password" minlength="8" autocomplete="new-password" required />
+            </div>
+
+            <button class="signup-submit" type="submit">註冊</button>
+            <p class="signup-message" id="signup-message" role="status"></p>
+          </form>
+
+          <a class="signup-login" href="index.html">已經有帳號？返回首頁</a>
+        </section>
+      </div>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="./js/components.js"></script>
+    <script>
+      document.querySelector('#signup-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const password = document.querySelector('#signup-password').value;
+        const confirmPassword = document.querySelector('#signup-confirm-password').value;
+        const message = document.querySelector('#signup-message');
+
+        if (password !== confirmPassword) {
+          message.textContent = '兩次輸入的密碼不一致。';
+          message.style.color = '#ef4444';
+          return;
+        }
+
+        message.textContent = '註冊資料已送出。';
+        message.style.color = 'var(--green)';
+        event.target.reset();
+      });
+    </script>
+  </body>
+</html>

@@ -831,6 +831,92 @@ img {
     flex-wrap: wrap;
 }
 
+.signup-page {
+    min-height: 58vh;
+    padding: 44px 0 64px;
+}
+
+.signup-card {
+    width: min(520px, 100%);
+    margin: 0 auto;
+    padding: 32px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(26, 50, 106, 0.06);
+}
+
+.signup-card h1 {
+    margin: 0 0 8px;
+    color: var(--primary-dark);
+    font-size: 30px;
+}
+
+.signup-card > p {
+    margin: 0 0 24px;
+    color: var(--subtext);
+}
+
+.signup-form {
+    display: grid;
+    gap: 16px;
+}
+
+.signup-field {
+    display: grid;
+    gap: 7px;
+}
+
+.signup-field label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.signup-field input {
+    width: 100%;
+    border: 1px solid #d9dce5;
+    border-radius: 5px;
+    padding: 12px 13px;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+}
+
+.signup-field input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.signup-submit {
+    border: 0;
+    border-radius: 5px;
+    padding: 13px 18px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.signup-submit:hover {
+    background: var(--primary-dark);
+}
+
+.signup-message {
+    min-height: 20px;
+    margin: 0;
+    color: var(--green);
+    font-size: 14px;
+}
+
+.signup-login {
+    display: block;
+    margin-top: 20px;
+    color: var(--primary);
+    font-size: 14px;
+    text-align: center;
+}
+
 .product-detail-section {
     padding: 28px 0 36px;
 }
@@ -856,12 +942,25 @@ img {
 }
 
 .product-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+}
+
+.product-gallery:active {
+    cursor: grabbing;
+}
+
+.product-gallery-track {
+    display: flex;
     gap: 14px;
+    will-change: transform;
 }
 
 .product-detail-image {
+    flex: 0 0 calc((100% - 14px) / 2);
     min-height: 430px;
     border-radius: 12px;
     background: linear-gradient(145deg, #edf3ff, #fff8f1);
@@ -939,16 +1038,34 @@ img {
     color: var(--subtext);
 }
 
-.add-to-cart {
-    width: 100%;
+.product-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.product-actions button {
+    flex: 1;
     border: 0;
     border-radius: 6px;
     padding: 14px 18px;
-    background: var(--primary);
-    color: var(--white);
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
+}
+
+.contact-seller {
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: 1px solid rgba(26, 50, 106, 0.15) !important;
+}
+
+.contact-seller:hover {
+    background: var(--accent-soft);
+}
+
+.add-to-cart {
+    background: var(--primary);
+    color: var(--white);
 }
 
 .add-to-cart:hover {
@@ -1033,6 +1150,14 @@ img {
 
     .product-gallery {
         gap: 8px;
+    }
+
+    .product-gallery-track {
+        gap: 8px;
+    }
+
+    .product-detail-image {
+        flex-basis: calc((100% - 8px) / 2);
     }
 
     .product-detail-image {
