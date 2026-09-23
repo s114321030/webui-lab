@@ -9,7 +9,6 @@ const sharedHeader = `
       <div class="topbar-right">
         <a href="index.html">Login</a>
         <a href="index.html">Sign Up</a>
-        <a href="index.html">Notification</a>
       </div>
     </div>
   </div>
@@ -32,6 +31,7 @@ const sharedHeader = `
       </nav>
 
       <div class="header-actions">
+        <button class="notification-bell" type="button" aria-label="通知" title="通知">🔔</button>
         <div class="chat-bubble-wrap">
           <div class="chat-bubble">💬</div>
           <span class="chat-badge">3</span>
