@@ -61,7 +61,17 @@
         2: { images: ['📱', '🛡️'], name: 'Smartphone case', price: '$18', date: '2026/09/16' },
         3: { images: ['🧴', '✨'], name: 'Hydrating skincare set', price: '$29', date: '2026/09/14' },
         4: { images: ['👜', '👝'], name: 'Minimalist shoulder bag', price: '$45', date: '2026/09/12' },
-        5: { images: ['⌚', '⏱️'], name: 'Classic digital watch', price: '$64', date: '2026/09/10' }
+        5: { images: ['⌚', '⏱️'], name: 'Classic digital watch', price: '$64', date: '2026/09/10' },
+        6: { images: ['📖', '🧮'], name: 'College calculus textbook', price: '$32', date: '2026/09/08' },
+        7: { images: ['📘', '✍️'], name: 'English writing handbook', price: '$24', date: '2026/09/06' },
+        8: { images: ['☕', '🔌'], name: 'Compact dorm coffee maker', price: '$55', date: '2026/09/04' },
+        9: { images: ['🪭', '🌬️'], name: 'Portable desk fan', price: '$22', date: '2026/09/02' },
+        10: { images: ['🚲', '⛑️'], name: 'Bicycle helmet', price: '$28', date: '2026/08/30' },
+        11: { images: ['🚌', '💳'], name: 'Transit card holder', price: '$12', date: '2026/08/28' },
+        12: { images: ['🏀', '⛹️'], name: 'Indoor basketball', price: '$26', date: '2026/08/26' },
+        13: { images: ['🎒', '🥾'], name: 'Weekend hiking backpack', price: '$58', date: '2026/08/24' },
+        14: { images: ['🕯️', '🌿'], name: 'Scented study room candle', price: '$16', date: '2026/08/22' },
+        15: { images: ['🎧', '🎵'], name: 'Wireless study headphones', price: '$72', date: '2026/08/20' }
       };
 
       const productId = new URLSearchParams(window.location.search).get('id') || '1';
@@ -144,7 +154,7 @@
         .slice(0, 4)
         .map(([id, item]) => `
           <a class="product-card" href="product.html?id=${id}">
-            <div class="product-image">${item.image}</div>
+            <div class="product-image">${item.images[0]}</div>
             <div class="product-info">
               <p class="product-name">${item.name}</p>
               <div class="product-price"><span class="price-main">${item.price}</span></div>

@@ -66,13 +66,7 @@ const sharedHeader = `
           <input name="q" type="search" placeholder="搜尋商品、拍賣品、品牌" />
           <button class="search-btn">搜尋</button>
         </form>
-        <div class="hot-search">
-          <a href="index.html">電腦</a>
-          <a href="index.html">手機</a>
-          <a href="index.html">包包</a>
-          <a href="index.html">書籍</a>
-          <a href="index.html">公仔</a>
-        </div>
+        <div class="hot-search" id="recent-searches" aria-label="最近搜尋"></div>
       </div>
     </div>
   </header>`;
@@ -88,6 +82,39 @@ const sharedFooter = `
 
 document.querySelector('[data-component="header"]').outerHTML = sharedHeader;
 document.querySelector('[data-component="footer"]').outerHTML = sharedFooter;
+
+const recentSearchesKey = 'recentSearches';
+const recentSearches = document.querySelector('#recent-searches');
+const searchForm = document.querySelector('.search-bar');
+const searchInput = searchForm.querySelector('input[name="q"]');
+
+const readRecentSearches = () => {
+  try {
+    return JSON.parse(localStorage.getItem(recentSearchesKey)) || [];
+  } catch {
+    return [];
+  }
+};
+
+const renderRecentSearches = () => {
+  recentSearches.replaceChildren();
+  readRecentSearches().forEach((term) => {
+    const link = document.createElement('a');
+    link.href = `search.html?q=${encodeURIComponent(term)}`;
+    link.textContent = term;
+    recentSearches.appendChild(link);
+  });
+};
+
+searchForm.addEventListener('submit', () => {
+  const term = searchInput.value.trim();
+  if (!term) return;
+  const searches = readRecentSearches().filter((item) => item.toLowerCase() !== term.toLowerCase());
+  searches.unshift(term);
+  localStorage.setItem(recentSearchesKey, JSON.stringify(searches.slice(0, 12)));
+});
+
+renderRecentSearches();
 
 const notificationButton = document.querySelector('.notification-bell');
 const notificationPanel = document.querySelector('.notification-panel');
