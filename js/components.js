@@ -31,12 +31,32 @@ const sharedHeader = `
       </nav>
 
       <div class="header-actions">
-        <button class="notification-bell" type="button" aria-label="通知" title="通知">🔔</button>
-        <div class="chat-bubble-wrap">
-          <div class="chat-bubble">💬</div>
-          <span class="chat-badge">3</span>
+        <div class="notification-wrap">
+          <button class="notification-bell" type="button" aria-label="通知" title="通知" aria-expanded="false">🔔</button>
+          <div class="notification-panel" hidden>
+            <strong>目前通知</strong>
+            <ul>
+              <li>你的商品已有人收藏</li>
+              <li>有新的推薦商品上架</li>
+              <li>購物車內有商品即將售罄</li>
+            </ul>
+          </div>
         </div>
-        <div class="cart">🛒</div>
+        <div class="chat-bubble-wrap">
+          <button class="chat-bubble" type="button" aria-label="聊天" title="聊天" aria-expanded="false">💬</button>
+          <span class="chat-badge">3</span>
+          <div class="action-panel" hidden>
+            <strong>聊天</strong>
+            <p>目前沒有新的聊天訊息。</p>
+          </div>
+        </div>
+        <div class="cart-wrap">
+          <button class="cart" type="button" aria-label="購物車" title="購物車" aria-expanded="false">🛒</button>
+          <div class="action-panel" hidden>
+            <strong>購物車</strong>
+            <p>目前購物車是空的。</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -68,3 +88,37 @@ const sharedFooter = `
 
 document.querySelector('[data-component="header"]').outerHTML = sharedHeader;
 document.querySelector('[data-component="footer"]').outerHTML = sharedFooter;
+
+const notificationButton = document.querySelector('.notification-bell');
+const notificationPanel = document.querySelector('.notification-panel');
+const actionButtons = document.querySelectorAll('.chat-bubble, .cart');
+const actionPanels = document.querySelectorAll('.notification-panel, .action-panel');
+const panelButtons = [notificationButton, ...actionButtons];
+
+const closeAllPanels = () => {
+  actionPanels.forEach((panel) => panel.hidden = true);
+  panelButtons.forEach((button) => button.setAttribute('aria-expanded', 'false'));
+};
+
+notificationButton.addEventListener('click', () => {
+  const isOpen = !notificationPanel.hidden;
+  closeAllPanels();
+  notificationPanel.hidden = isOpen;
+  notificationButton.setAttribute('aria-expanded', String(!isOpen));
+});
+
+actionButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const panel = button.parentElement.querySelector('.action-panel');
+    const isOpen = !panel.hidden;
+    closeAllPanels();
+    panel.hidden = isOpen;
+    button.setAttribute('aria-expanded', String(!isOpen));
+  });
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.notification-wrap, .chat-bubble-wrap, .cart-wrap')) {
+    closeAllPanels();
+  }
+});

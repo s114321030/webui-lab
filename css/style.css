@@ -112,6 +112,64 @@ img {
     transform: translateY(-3px);
 }
 
+.notification-wrap {
+    position: relative;
+}
+
+.notification-panel {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: -63px;
+    right: auto;
+    z-index: 10;
+    width: 270px;
+    padding: 16px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(26, 50, 106, 0.12);
+    color: var(--text);
+}
+
+.notification-panel::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 77px;
+    width: 12px;
+    height: 12px;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    transform: rotate(45deg);
+}
+
+.notification-panel strong {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--primary-dark);
+}
+
+.notification-panel ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.notification-panel li {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+}
+
+.notification-panel li:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
 .status-pill {
     background: var(--primary-soft);
     color: var(--primary);
@@ -123,6 +181,11 @@ img {
 }
 
 .chat-bubble-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-wrap {
     position: relative;
     display: inline-block;
 }
@@ -292,6 +355,64 @@ img {
 }
 
 .cart {
+    border: 1px solid rgba(26, 50, 106, 0.15);
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.action-panel {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    margin-left: -135px;
+    z-index: 10;
+    width: 270px;
+    padding: 16px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(26, 50, 106, 0.12);
+    color: var(--text);
+}
+
+.action-panel::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    margin-left: -6px;
+    width: 12px;
+    height: 12px;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    transform: rotate(45deg);
+}
+
+.cart-wrap .action-panel {
+    left: -168px;
+    margin-left: 0;
+}
+
+.cart-wrap .action-panel::before {
+    left: 182px;
+    margin-left: 0;
+}
+
+.action-panel strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-dark);
+}
+
+.action-panel p {
+    margin: 0;
+    color: var(--subtext);
+    font-size: 13px;
+}
+
+.cart {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -301,9 +422,6 @@ img {
     font-size: 20px;
     background: var(--primary-soft);
     color: var(--primary);
-    border: 1px solid rgba(26, 50, 106, 0.15);
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .nav {

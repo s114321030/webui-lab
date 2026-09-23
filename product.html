@@ -66,6 +66,7 @@
 
       const productId = new URLSearchParams(window.location.search).get('id') || '1';
       const product = products[productId] || products[1];
+      document.title = product.name;
       const gallery = document.querySelector('.product-gallery');
       const galleryTrack = document.querySelector('#product-gallery-track');
       const galleryImages = product.images;
