@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>商品分類</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div data-component="header"></div>
+
+    <main class="category-page">
+      <section class="section">
+        <div class="container">
+          <div class="category-heading">
+            <div class="category-heading-icon" id="category-icon"></div>
+            <div>
+              <h1 id="category-name"></h1>
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="sort-bar" aria-label="商品過濾">
+              <label for="category-sort">過濾</label>
+              <select id="category-sort">
+                <option value="newest">最新上架</option>
+                <option value="oldest">最早上架</option>
+                <option value="cheap">價格由低到高</option>
+                <option value="expensive">價格由高到低</option>
+              </select>
+            </div>
+            <form class="filter-bar" id="category-filter" aria-label="價格過濾">
+            <div class="price-filter">
+              <span class="filter-label">最高價格</span>
+              <div class="price-range-control">
+                <div class="price-slider">
+                  <div class="price-track-fill"></div>
+                  <input class="price-range price-range-max" id="category-price-range-max" type="range" min="0" max="100" value="100" aria-label="最高價格滑桿" />
+                </div>
+                <input class="price-input" id="category-price-max" name="priceMax" type="number" min="0" max="100" placeholder="最高" aria-label="最高價格" />
+              </div>
+            </div>
+            <button type="submit">套用</button>
+            </form>
+          </div>
+          <div class="product-grid" id="category-products"></div>
+        </div>
+      </section>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <button class="back-to-top" type="button" aria-label="回到最上面" title="回到最上面">↑</button>
+
+    <script src="./js/components.js"></script>
+    <script>
+      const products = [
+        { id: 1, category: 'fashion', image: '👟', name: 'Casual running shoes', price: '$39', date: '2026-09-18' },
+        { id: 2, category: 'electronics', image: '📱', name: 'Smartphone case', price: '$18', date: '2026-09-16' },
+        { id: 3, category: 'beauty', image: '🧴', name: 'Hydrating skincare set', price: '$29', date: '2026-09-14' },
+        { id: 4, category: 'fashion', image: '👜', name: 'Minimalist shoulder bag', price: '$45', date: '2026-09-12' },
+        { id: 5, category: 'accessories', image: '⌚', name: 'Classic digital watch', price: '$64', date: '2026-09-10' }
+      ];
+
+      const categories = {
+        fashion: { name: 'Fashion', icon: '👕' },
+        electronics: { name: 'Electronics', icon: '💻' },
+        home: { name: 'Home', icon: '🏠' },
+        beauty: { name: 'Beauty', icon: '🧴' },
+        groceries: { name: 'Groceries', icon: '🥬' },
+        accessories: { name: 'Accessories', icon: '🎧' }
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get('type') || 'fashion';
+      const sort = params.get('sort') || 'newest';
+      const priceMax = params.get('priceMax') || '';
+      const category = categories[type] || categories.fashion;
+      const categoryProducts = products.filter((product) => product.category === type);
+      const pageMaxPrice = Math.max(...categoryProducts.map((product) => Number.parseInt(product.price.slice(1))), 1);
+      const selectedPriceMax = priceMax ? Math.min(Number(priceMax), pageMaxPrice) : pageMaxPrice;
+      const visibleProducts = categoryProducts.filter((product) =>
+        Number.parseInt(product.price.slice(1)) <= selectedPriceMax
+      );
+
+      visibleProducts.sort((first, second) => {
+        if (sort === 'oldest') return first.date.localeCompare(second.date);
+        if (sort === 'cheap') return Number.parseInt(first.price.slice(1)) - Number.parseInt(second.price.slice(1));
+        if (sort === 'expensive') return Number.parseInt(second.price.slice(1)) - Number.parseInt(first.price.slice(1));
+        return second.date.localeCompare(first.date);
+      });
+
+      document.title = `${category.name} | 商品分類`;
+      document.querySelector('#category-name').textContent = category.name;
+      document.querySelector('#category-icon').textContent = category.icon;
+      document.querySelector('#category-sort').value = sort;
+      document.querySelector('#category-sort').addEventListener('change', (event) => {
+        params.set('sort', event.target.value);
+        window.location.search = params.toString();
+      });
+      const categoryPriceMaxInput = document.querySelector('#category-price-max');
+      const categoryPriceMaxRange = document.querySelector('#category-price-range-max');
+      const categoryPriceFill = document.querySelector('.price-track-fill');
+      categoryPriceMaxInput.max = pageMaxPrice;
+      categoryPriceMaxInput.value = selectedPriceMax;
+      categoryPriceMaxRange.max = pageMaxPrice;
+      categoryPriceMaxRange.value = selectedPriceMax;
+      const updateCategoryPriceRange = () => {
+        let max = Number(categoryPriceMaxRange.value);
+        const sliderWidth = categoryPriceMaxRange.clientWidth;
+        const thumbRadius = 8;
+        const fillWidth = thumbRadius + (max / pageMaxPrice) * (sliderWidth - thumbRadius * 2);
+        categoryPriceFill.style.width = `${fillWidth}px`;
+      };
+      categoryPriceMaxRange.addEventListener('input', () => {
+        categoryPriceMaxInput.value = categoryPriceMaxRange.value;
+        updateCategoryPriceRange();
+      });
+      categoryPriceMaxInput.addEventListener('input', () => {
+        categoryPriceMaxRange.value = Math.max(0, Math.min(Number(categoryPriceMaxInput.value) || 0, pageMaxPrice));
+        updateCategoryPriceRange();
+      });
+      updateCategoryPriceRange();
+      document.querySelector('#category-filter').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        ['priceMax'].forEach((key) => {
+          const value = formData.get(key);
+          if (value) params.set(key, value);
+          else params.delete(key);
+        });
+        window.location.search = params.toString();
+      });
+      document.querySelector('#category-products').innerHTML = visibleProducts.length
+        ? visibleProducts.map((product) => `
+            <a class="product-card" href="product.html?id=${product.id}">
+              <div class="product-image">${product.image}</div>
+              <div class="product-info">
+                <p class="product-name">${product.name}</p>
+                <div class="product-price"><span class="price-main">${product.price}</span></div>
+              </div>
+            </a>`).join('')
+        : '<p class="product-description">這個分類目前還沒有商品。</p>';
+
+      document.querySelector('.back-to-top').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+  </body>
+</html>

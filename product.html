@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>商品詳情</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div data-component="header"></div>
+
+    <main>
+      <section class="product-detail-section">
+        <div class="container">
+          <div class="product-detail">
+            <div class="product-gallery" aria-label="商品圖片">
+              <div class="product-detail-image" id="product-image"></div>
+              <div class="product-detail-image product-detail-image-secondary" id="product-image-secondary"></div>
+            </div>
+            <div class="product-detail-info">
+              <span class="product-label">現貨商品</span>
+              <h1 id="product-name"></h1>
+              <p class="product-detail-price" id="product-price"></p>
+              <p class="product-description">精心挑選的優質商品，適合日常使用。商品狀況良好，出貨前會再次確認內容與包裝。</p>
+              <div class="product-seller">
+                <span class="seller-avatar">R</span>
+                <div>
+                  <strong>優質賣家</strong>
+                  <small>已上架於 <span id="product-date"></span></small>
+                </div>
+              </div>
+              <button class="add-to-cart" type="button">🛒 加入購物車</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section recommendation-section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title">
+              <span class="dot"></span>
+              <span>為您推薦</span>
+            </div>
+          </div>
+          <div class="product-grid" id="recommendations"></div>
+        </div>
+      </section>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <button class="back-to-top" type="button" aria-label="回到最上面" title="回到最上面">↑</button>
+
+    <script src="./js/components.js"></script>
+    <script>
+      const products = {
+        1: { image: '👟', secondaryImage: '🏃', name: 'Casual running shoes', price: '$39', date: '2026/09/18' },
+        2: { image: '📱', secondaryImage: '🛡️', name: 'Smartphone case', price: '$18', date: '2026/09/16' },
+        3: { image: '🧴', secondaryImage: '✨', name: 'Hydrating skincare set', price: '$29', date: '2026/09/14' },
+        4: { image: '👜', secondaryImage: '👝', name: 'Minimalist shoulder bag', price: '$45', date: '2026/09/12' },
+        5: { image: '⌚', secondaryImage: '⏱️', name: 'Classic digital watch', price: '$64', date: '2026/09/10' }
+      };
+
+      const productId = new URLSearchParams(window.location.search).get('id') || '1';
+      const product = products[productId] || products[1];
+      document.querySelector('#product-image').textContent = product.image;
+      document.querySelector('#product-image-secondary').textContent = product.secondaryImage;
+      document.querySelector('#product-name').textContent = product.name;
+      document.querySelector('#product-price').textContent = product.price;
+      document.querySelector('#product-date').textContent = product.date;
+
+      document.querySelector('#recommendations').innerHTML = Object.entries(products)
+        .filter(([id]) => id !== productId)
+        .slice(0, 4)
+        .map(([id, item]) => `
+          <a class="product-card" href="product.html?id=${id}">
+            <div class="product-image">${item.image}</div>
+            <div class="product-info">
+              <p class="product-name">${item.name}</p>
+              <div class="product-price"><span class="price-main">${item.price}</span></div>
+            </div>
+          </a>`)
+        .join('');
+
+      document.querySelector('.back-to-top').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+  </body>
+</html>
