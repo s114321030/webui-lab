@@ -31,6 +31,7 @@ const sharedHeader = `
       </nav>
 
       <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="切換深色模式" title="切換深色模式" aria-pressed="false">☾</button>
         <div class="notification-wrap">
           <button class="notification-bell" type="button" aria-label="通知" title="通知" aria-expanded="false">🔔</button>
           <div class="notification-panel" hidden>
@@ -82,6 +83,32 @@ const sharedFooter = `
 
 document.querySelector('[data-component="header"]').outerHTML = sharedHeader;
 document.querySelector('[data-component="footer"]').outerHTML = sharedFooter;
+
+const themeToggle = document.querySelector('.theme-toggle');
+
+const updateThemeToggle = () => {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const label = isDark ? '切換淺色模式' : '切換深色模式';
+  themeToggle.textContent = isDark ? '☀' : '☾';
+  themeToggle.setAttribute('aria-label', label);
+  themeToggle.setAttribute('title', label);
+  themeToggle.setAttribute('aria-pressed', String(isDark));
+};
+
+updateThemeToggle();
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = nextTheme;
+
+  try {
+    localStorage.setItem('theme', nextTheme);
+  } catch {
+    // Theme switching still works for the current page when storage is unavailable.
+  }
+
+  updateThemeToggle();
+});
 
 const recentSearchesKey = 'recentSearches';
 const recentSearches = document.querySelector('#recent-searches');
