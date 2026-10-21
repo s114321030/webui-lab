@@ -1,0 +1,71 @@
+[33mcommit 974b8615f9ea07d6aa2d16a0db4270298f883f79[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Oct 7 09:37:46 2026 +0800
+
+    add dark mode
+
+[33mcommit 080a3e8317be6a1ae13b2591f62e3b30b91bae7c[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 11:41:47 2026 +0800
+
+    category, product在行動裝置上會更改排列
+
+[33mcommit 50130fbf4e4cfb58b293ec615414b7228df65e7f[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 11:36:22 2026 +0800
+
+    搜尋欄空白時搜尋鍵無法使用。在頂時跳到最頂的功能不顯示。
+
+[33mcommit b0ae1e4ec69fb6cf8c4c737569c7abac6f2ac825[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 11:31:44 2026 +0800
+
+    修改分類，商品增加上浮特效
+
+[33mcommit bb04ef2f36cbeb2846d7a41cac84b6801b43378b[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 11:08:03 2026 +0800
+
+    新增通知、聊天和購物車點擊介面
+
+[33mcommit a05dec78ac49993a88e8e2d675e25c4a53e30c45[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 10:55:13 2026 +0800
+
+    商品頁面圖片改循環捲動。加入連絡賣家
+
+[33mcommit a4ffeddcaaf49bdf75c678fb2ad9a85fa3242744[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 09:37:45 2026 +0800
+
+    修改notification位置, 並和聊天、購物車同步特效
+
+[33mcommit d79820dc64e644361ba6f9be5c459064a1e9ba41[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 09:20:22 2026 +0800
+
+    搜尋畫面設定價格範圍拉桿
+
+[33mcommit b5562e9e2b4ff15d549f8ba2c0017d91976249d5[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Wed Sep 23 08:42:19 2026 +0800
+
+    新增商品、搜尋、分類的頁面。用js同步外框。新增搜尋的filter。
+
+[33mcommit 40f1250ba7f9493072cb5fb66038ca2f88b5c848[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Thu Sep 17 23:34:42 2026 +0800
+
+    web雛型
+
+[33mcommit be6c782034ca485c623b42953ec9efdbdd4de39c[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Mon Sep 14 18:00:53 2026 +0800
+
+    上傳測試，無修改
+
+[33mcommit 28eb2ca10c6ac2e3cc84f1c8321b326261b13328[m
+Author: YYY <s114321030@mail1.nenu.edu.tw>
+Date:   Mon Sep 14 14:08:01 2026 +0800
+
+    0: initialize project

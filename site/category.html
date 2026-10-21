@@ -52,51 +52,25 @@
 
     <button class="back-to-top" type="button" aria-label="回到最上面" title="回到最上面">↑</button>
 
+    <script src="./js/products.js"></script>
     <script src="./js/components.js"></script>
     <script>
-      const products = [
-        { id: 1, category: 'sports', image: '👟', name: 'Casual running shoes', price: '$39', date: '2026-09-18' },
-        { id: 2, category: 'digital', image: '📱', name: 'Smartphone case', price: '$18', date: '2026-09-16' },
-        { id: 3, category: 'other', image: '🧴', name: 'Hydrating skincare set', price: '$29', date: '2026-09-14' },
-        { id: 4, category: 'other', image: '👜', name: 'Minimalist shoulder bag', price: '$45', date: '2026-09-12' },
-        { id: 5, category: 'digital', image: '⌚', name: 'Classic digital watch', price: '$64', date: '2026-09-10' },
-        { id: 6, category: 'textbooks', image: '📖', name: 'College calculus textbook', price: '$32', date: '2026-09-08' },
-        { id: 7, category: 'textbooks', image: '📘', name: 'English writing handbook', price: '$24', date: '2026-09-06' },
-        { id: 8, category: 'dorm-appliances', image: '☕', name: 'Compact dorm coffee maker', price: '$55', date: '2026-09-04' },
-        { id: 9, category: 'dorm-appliances', image: '🪭', name: 'Portable desk fan', price: '$22', date: '2026-09-02' },
-        { id: 10, category: 'transportation', image: '🚲', name: 'Bicycle helmet', price: '$28', date: '2026-08-30' },
-        { id: 11, category: 'transportation', image: '🚌', name: 'Transit card holder', price: '$12', date: '2026-08-28' },
-        { id: 12, category: 'sports', image: '🏀', name: 'Indoor basketball', price: '$26', date: '2026-08-26' },
-        { id: 13, category: 'sports', image: '🎒', name: 'Weekend hiking backpack', price: '$58', date: '2026-08-24' },
-        { id: 14, category: 'other', image: '🕯️', name: 'Scented study room candle', price: '$16', date: '2026-08-22' },
-        { id: 15, category: 'digital', image: '🎧', name: 'Wireless study headphones', price: '$72', date: '2026-08-20' }
-      ];
-
-      const categories = {
-        textbooks: { name: '教科書', icon: '📚' },
-        'dorm-appliances': { name: '宿舍家電', icon: '🏠' },
-        digital: { name: '數位週邊', icon: '💻' },
-        transportation: { name: '交通', icon: '🚌' },
-        sports: { name: '運動休閒', icon: '⚽' },
-        other: { name: '其他', icon: '📦' }
-      };
-
       const params = new URLSearchParams(window.location.search);
       const type = params.get('type') || 'other';
       const sort = params.get('sort') || 'newest';
       const priceMax = params.get('priceMax') || '';
-      const category = categories[type] || categories.other;
-      const categoryProducts = products.filter((product) => product.category === type);
-      const pageMaxPrice = Math.max(...categoryProducts.map((product) => Number.parseInt(product.price.slice(1))), 1);
+      const category = window.PRODUCT_CATEGORIES[type] || window.PRODUCT_CATEGORIES.other;
+      const categoryProducts = window.PRODUCTS.filter((product) => product.category === type);
+      const pageMaxPrice = Math.max(...categoryProducts.map((product) => product.price), 1);
       const selectedPriceMax = priceMax ? Math.min(Number(priceMax), pageMaxPrice) : pageMaxPrice;
       const visibleProducts = categoryProducts.filter((product) =>
-        Number.parseInt(product.price.slice(1)) <= selectedPriceMax
+        product.price <= selectedPriceMax
       );
 
       visibleProducts.sort((first, second) => {
         if (sort === 'oldest') return first.date.localeCompare(second.date);
-        if (sort === 'cheap') return Number.parseInt(first.price.slice(1)) - Number.parseInt(second.price.slice(1));
-        if (sort === 'expensive') return Number.parseInt(second.price.slice(1)) - Number.parseInt(first.price.slice(1));
+        if (sort === 'cheap') return first.price - second.price;
+        if (sort === 'expensive') return second.price - first.price;
         return second.date.localeCompare(first.date);
       });
 
@@ -144,10 +118,10 @@
       document.querySelector('#category-products').innerHTML = visibleProducts.length
         ? visibleProducts.map((product) => `
             <a class="product-card" href="product.html?id=${product.id}">
-              <div class="product-image">${product.image}</div>
+              <div class="product-image">${product.images[0]}</div>
               <div class="product-info">
                 <p class="product-name">${product.name}</p>
-                <div class="product-price"><span class="price-main">${product.price}</span></div>
+                <div class="product-price"><span class="price-main">$${product.price}</span></div>
               </div>
             </a>`).join('')
         : '<p class="product-description">這個分類目前還沒有商品。</p>';

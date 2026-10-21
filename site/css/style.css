@@ -53,8 +53,7 @@ img {
 }
 
 .container {
-    width: 1200px;
-    max-width: 90%;
+    width: min(calc(100% - 32px), 1200px);
     margin: 0 auto;
 }
 
@@ -498,13 +497,13 @@ img {
 
 .hero-inner {
     display: grid;
-    grid-template-columns: 2.3fr 1fr;
+    grid-template-columns: 1fr;
     gap: 18px;
 }
 
 .main-banner {
     position: relative;
-    height: 340px;
+    height: 300px;
     border-radius: 12px;
     background: linear-gradient(135deg, var(--primary-light), var(--primary-soft));
     overflow: hidden;
@@ -532,7 +531,7 @@ img {
 
 .banner-content h1 {
     margin: 0;
-    font-size: 38px;
+    font-size: 28px;
     line-height: 1.1;
 }
 
@@ -737,14 +736,14 @@ img {
 
 .category-row {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
 }
 
 .category-card {
     background: var(--white);
     border-radius: 12px;
-    padding: 20px 16px;
+    padding: 12px 6px;
     text-align: center;
     box-shadow: 0 8px 18px rgba(0,0,0,0.04);
     color: inherit;
@@ -758,15 +757,15 @@ img {
 }
 
 .category-icon {
-    width: 60px;
-    height: 60px;
+    width: 44px;
+    height: 44px;
     border-radius: 18px;
     background: linear-gradient(135deg, #ffe7d6, #fff6ef);
-    margin: 0 auto 12px;
+    margin: 0 auto 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: 22px;
 }
 
 .category-card p {
@@ -960,10 +959,8 @@ img {
     background: var(--primary-dark);
 }
 
-@media (max-width: 760px) {
-    .controls-row {
-        flex-wrap: wrap;
-    }
+.controls-row {
+    flex-wrap: wrap;
 }
 
 .category-page + .footer {
@@ -1292,69 +1289,77 @@ img {
     outline-offset: 3px;
 }
 
-@media (max-width: 980px) {
-    .hero-inner {
-        grid-template-columns: 1fr;
-    }
-
+.topbar-inner,
+.header-inner,
+.section-header,
+.footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-@media (max-width: 640px) {
+.header-inner {
+    gap: 14px;
+}
+
+.search-box {
+    width: 100%;
+    max-width: none;
+}
+
+.product-gallery-track {
+    gap: 8px;
+}
+
+.product-detail-price {
+    font-size: 26px;
+}
+
+.back-to-top {
+    right: 16px;
+    bottom: 16px;
+}
+
+@media (min-width: 641px) {
     .topbar-inner,
     .header-inner,
     .section-header,
     .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
     }
 
     .header-inner {
-        gap: 14px;
+        gap: 22px;
     }
 
     .search-box {
-        width: 100%;
-        max-width: none;
-    }
-
-    .category-row {
-        gap: 8px;
+        width: auto;
+        max-width: 700px;
     }
 
     .category-card {
-        padding: 12px 6px;
+        padding: 20px 16px;
     }
 
     .category-icon {
-        width: 44px;
-        height: 44px;
-        margin-bottom: 8px;
-        font-size: 22px;
-    }
-
-    .main-banner {
-        height: 300px;
-    }
-
-    .product-gallery-track {
-        gap: 8px;
-    }
-
-    .product-detail-price {
-        font-size: 26px;
-    }
-
-    .banner-content h1 {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 12px;
         font-size: 28px;
     }
 
-    .back-to-top {
-        right: 16px;
-        bottom: 16px;
+    .main-banner {
+        height: 340px;
     }
-}
 
-@media (min-width: 641px) {
+    .banner-content h1 {
+        font-size: 38px;
+    }
+
+    .product-gallery-track {
+        gap: 14px;
+    }
+
     .product-detail {
         padding: 24px;
     }
@@ -1368,6 +1373,15 @@ img {
         font-size: 30px;
     }
 
+    .product-detail-price {
+        font-size: 32px;
+    }
+
+    .back-to-top {
+        right: 24px;
+        bottom: 24px;
+    }
+
     .product-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -1378,6 +1392,14 @@ img {
 }
 
 @media (min-width: 981px) {
+    .hero-inner {
+        grid-template-columns: 2.3fr 1fr;
+    }
+
+    .controls-row {
+        flex-wrap: nowrap;
+    }
+
     .product-detail {
         grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.9fr);
         gap: 36px;

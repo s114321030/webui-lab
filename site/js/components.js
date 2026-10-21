@@ -76,7 +76,6 @@ const sharedFooter = `
   <footer class="footer">
     <div class="container footer-inner">
       <span>© 2026 Shop Demo</span>
-      <span>Free shipping over $50</span>
       <span>Customer support 24/7</span>
     </div>
   </footer>`;
@@ -141,7 +140,7 @@ searchForm.addEventListener('submit', (event) => {
   }
   const searches = readRecentSearches().filter((item) => item.toLowerCase() !== term.toLowerCase());
   searches.unshift(term);
-  localStorage.setItem(recentSearchesKey, JSON.stringify(searches.slice(0, 12)));
+  localStorage.setItem(recentSearchesKey, JSON.stringify(searches.slice(0, 5)));
 });
 
 renderRecentSearches();
