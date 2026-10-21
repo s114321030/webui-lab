@@ -78,6 +78,10 @@ img {
     align-items: center;
 }
 
+.mobile-account-links {
+    display: none;
+}
+
 .topbar a:hover {
     color: var(--accent);
 }
@@ -89,6 +93,11 @@ img {
 }
 
 .header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+
     background: var(--white);
     padding: 18px 0 12px;
     border-bottom: 1px solid var(--line);
@@ -386,7 +395,7 @@ img {
     gap: 12px;
     width: 100%;
     margin-top: 8px;
-    font-size: 12px;
+    font-size: 15px;
     color: var(--subtext);
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -1301,9 +1310,189 @@ img {
     gap: 14px;
 }
 
+.header {
+    display: grid;
+    grid-template-areas:
+        "logo search search search"
+        ". recent accounts theme"
+        "actions actions actions actions";
+    grid-template-columns: 42px minmax(0, 1fr) auto 32px;
+    align-items: center;
+    gap: 2px 6px;
+    padding: 10px 10px;
+}
+
+.header-inner,
+.header-search-row {
+    display: contents;
+}
+
+.logo {
+    grid-area: logo;
+    min-width: 0;
+    align-self: start;
+}
+
+.brand-copy {
+    display: none;
+}
+
 .search-box {
+    display: contents;
+}
+
+.search-bar {
+    grid-area: search;
+}
+
+.hot-search {
+    grid-area: recent;
+    align-items: center;
+    align-self: center;
+    height: 32px;
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
+.header-search-row {
+    margin-top: 0;
+}
+
+.mobile-account-links {
+    grid-area: accounts;
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 10px;
+    height: 32px;
+    margin-top: 0;
+    font-size: 12px;
+    color: var(--primary);
+}
+
+.mobile-account-links a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.main-nav {
+    display: none;
+}
+
+.header-actions {
+    display: contents;
+}
+
+.theme-toggle {
+    grid-area: theme;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+}
+
+.topbar {
+    display: none;
+}
+
+body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+
+.mobile-bottom-actions {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 0 0 env(safe-area-inset-bottom);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-bottom-actions > div {
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    height: 56px;
+    border-right: 1px solid var(--line);
+}
+
+.mobile-bottom-actions > div:last-child {
+    border-right: 0;
+}
+
+.mobile-bottom-actions button {
     width: 100%;
-    max-width: none;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.mobile-bottom-actions .chat-badge {
+    top: 4px;
+    right: calc(50% - 22px);
+}
+
+.notification-panel {
+    left: auto;
+    right: 0;
+}
+
+.notification-panel::before {
+    left: auto;
+    right: 13px;
+}
+
+.action-panel {
+    left: auto;
+    right: 0;
+    margin-left: 0;
+}
+
+.action-panel::before,
+.cart-wrap .action-panel::before {
+    left: auto;
+    right: 13px;
+    margin-left: 0;
+}
+
+.cart-wrap .action-panel {
+    left: auto;
+    right: 0;
+}
+
+.notification-panel,
+.action-panel {
+    position: fixed;
+    top: auto;
+    right: 16px;
+    bottom: calc(72px + env(safe-area-inset-bottom));
+    left: 16px;
+    width: auto;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.notification-panel::before,
+.action-panel::before {
+    display: none;
+}
+
+.cart-wrap .action-panel {
+    right: 16px;
+    left: 16px;
+    margin: 0 auto;
+}
+
+.search-btn {
+    width: 72px;
+    font-size: 14px;
 }
 
 .product-gallery-track {
@@ -1316,10 +1505,163 @@ img {
 
 .back-to-top {
     right: 16px;
-    bottom: 16px;
+    bottom: 70px;
 }
 
 @media (min-width: 641px) {
+    .topbar {
+        display: block;
+    }
+
+    .header {
+        display: block;
+        padding: 18px 0 12px;
+    }
+
+    .header-inner {
+        display: flex;
+    }
+
+    .main-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
+        font-size: 14px;
+    }
+
+    .header-search-row {
+        display: block;
+        margin-top: 16px;
+    }
+
+    .search-box {
+        display: block;
+    }
+
+    .search-bar,
+    .hot-search {
+        grid-area: auto;
+    }
+
+    .hot-search {
+        margin-top: 8px;
+    }
+
+    .mobile-account-links {
+        display: none;
+    }
+
+    .header-actions {
+        display: flex;
+        width: auto;
+        margin-left: auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+    }
+
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    body {
+        padding-bottom: 0;
+    }
+
+    .mobile-bottom-actions {
+        position: static;
+        display: flex;
+        gap: 12px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .mobile-bottom-actions > div {
+        display: block;
+        height: auto;
+        border-right: 0;
+    }
+
+    .mobile-bottom-actions .notification-bell,
+    .mobile-bottom-actions .cart {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(26, 50, 106, 0.15);
+        border-radius: 50%;
+        background: var(--primary-soft);
+    }
+
+    .mobile-bottom-actions .chat-bubble {
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(26, 50, 106, 0.15);
+        border-radius: 50%;
+        background: var(--primary-soft);
+    }
+
+    .notification-panel,
+    .action-panel {
+        position: absolute;
+        top: calc(100% + 12px);
+        bottom: auto;
+        width: 270px;
+        margin: 0;
+    }
+
+    .notification-panel::before,
+    .action-panel::before {
+        display: block;
+    }
+
+    .notification-panel {
+        left: -63px;
+        right: auto;
+    }
+
+    .notification-panel::before {
+        left: 77px;
+        right: auto;
+    }
+
+    .action-panel {
+        left: 50%;
+        right: auto;
+        margin-left: -135px;
+    }
+
+    .action-panel::before {
+        left: 50%;
+        right: auto;
+        margin-left: -6px;
+    }
+
+    .cart-wrap .action-panel {
+        left: -168px;
+        right: auto;
+    }
+
+    .cart-wrap .action-panel::before {
+        left: 182px;
+        right: auto;
+    }
+
+    .logo {
+        min-width: 180px;
+    }
+
+    .brand-copy {
+        display: flex;
+    }
+
+    .search-btn {
+        width: 120px;
+        font-size: 16px;
+    }
+
     .topbar-inner,
     .header-inner,
     .section-header,

@@ -32,30 +32,32 @@ const sharedHeader = `
 
       <div class="header-actions">
         <button class="theme-toggle" type="button" aria-label="切換深色模式" title="切換深色模式" aria-pressed="false">☾</button>
-        <div class="notification-wrap">
-          <button class="notification-bell" type="button" aria-label="通知" title="通知" aria-expanded="false">🔔</button>
-          <div class="notification-panel" hidden>
-            <strong>目前通知</strong>
-            <ul>
-              <li>你的商品已有人收藏</li>
-              <li>有新的推薦商品上架</li>
-              <li>購物車內有商品即將售罄</li>
-            </ul>
+        <div class="mobile-bottom-actions">
+          <div class="notification-wrap">
+            <button class="notification-bell" type="button" aria-label="通知" title="通知" aria-expanded="false">🔔</button>
+            <div class="notification-panel" hidden>
+              <strong>目前通知</strong>
+              <ul>
+                <li>你的商品已有人收藏</li>
+                <li>有新的推薦商品上架</li>
+                <li>購物車內有商品即將售罄</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="chat-bubble-wrap">
-          <button class="chat-bubble" type="button" aria-label="聊天" title="聊天" aria-expanded="false">💬</button>
-          <span class="chat-badge">3</span>
-          <div class="action-panel" hidden>
-            <strong>聊天</strong>
-            <p>目前沒有新的聊天訊息。</p>
+          <div class="chat-bubble-wrap">
+            <button class="chat-bubble" type="button" aria-label="聊天" title="聊天" aria-expanded="false">💬</button>
+            <span class="chat-badge">3</span>
+            <div class="action-panel" hidden>
+              <strong>聊天</strong>
+              <p>目前沒有新的聊天訊息。</p>
+            </div>
           </div>
-        </div>
-        <div class="cart-wrap">
-          <button class="cart" type="button" aria-label="購物車" title="購物車" aria-expanded="false">🛒</button>
-          <div class="action-panel" hidden>
-            <strong>購物車</strong>
-            <p>目前購物車是空的。</p>
+          <div class="cart-wrap">
+            <button class="cart" type="button" aria-label="購物車" title="購物車" aria-expanded="false">🛒</button>
+            <div class="action-panel" hidden>
+              <strong>購物車</strong>
+              <p>目前購物車是空的。</p>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +70,10 @@ const sharedHeader = `
           <button class="search-btn">搜尋</button>
         </form>
         <div class="hot-search" id="recent-searches" aria-label="最近搜尋"></div>
+      </div>
+      <div class="mobile-account-links">
+        <a href="index.html">Login</a>
+        <a href="signup.html">Sign Up</a>
       </div>
     </div>
   </header>`;
