@@ -9,6 +9,7 @@ build/
 .env
 .env.local
 .env.*.local
+members.sqlite3*
 
 # 編輯器與系統
 .vscode/

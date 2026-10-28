@@ -7,8 +7,7 @@ const sharedHeader = `
         <a href="index.html">Follow us</a>
       </div>
       <div class="topbar-right">
-        <a href="index.html">Login</a>
-        <a href="signup.html">Sign Up</a>
+        <div class="google-sign-in" aria-label="Continue with Google"></div>
       </div>
     </div>
   </div>
@@ -72,8 +71,7 @@ const sharedHeader = `
         <div class="hot-search" id="recent-searches" aria-label="最近搜尋"></div>
       </div>
       <div class="mobile-account-links">
-        <a href="index.html">Login</a>
-        <a href="signup.html">Sign Up</a>
+        <div class="google-sign-in" aria-label="Continue with Google"></div>
       </div>
     </div>
   </header>`;
@@ -196,3 +194,7 @@ if (backToTop) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+const authScript = document.createElement('script');
+authScript.src = './js/auth.js';
+document.body.append(authScript);
